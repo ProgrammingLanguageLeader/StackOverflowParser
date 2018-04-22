@@ -17,6 +17,10 @@ def fetch_question_page_links(question):
     search_results = soup.select(
         'div.search-result div.summary div.result-link a'
     )
+    if not search_results:
+        search_results = soup.select(
+            'a.question-hyperlink'
+        )
     return search_results
 
 
