@@ -13,7 +13,7 @@
             <a class="navbar-brand text-white">StackOverflow Parser</a>
             <form id="search-form" class="form-inline justify-content-end" method="get" novalidate>
                 {% csrf_token %}
-                <input id="search-request" class="form-control mr-2" type="text" size="60" name="q" value="{{ question }}">
+                <input id="search-request" class="form-control mr-2" type="text" size="40" name="q" value="{{ question }}">
                 <button type="submit" class="form-control btn btn-primary mr-2">Search</button>
             </form>
         </nav>
