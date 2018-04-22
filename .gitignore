@@ -3,3 +3,4 @@ __pycache__/
 .idea/
 soup.html
 venv/
+*.sqlite3
