@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    StackOverflow Parser
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h2 class="mt-4">
+            Welcome to the StackOverflow Parser site!
+        </h2>
+        <p class="mt-2">
+            This site is enabling you to search answers on your questions
+            over the <a href="https://stackoverflow.com/">StackOverflow.com</a>
+        </p>
+    </div>
+
+    <ol id="question-pages" class="list-group">
+    </ol>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+            $('#search-form').submit(function (e) {
+                console.log( $('#search-request').val() );
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'search_answers' %}",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.is_taken) {
+                            let questions_data = data.questions_data;
+                            let question_pages_list = $('#question-pages');
+                            question_pages_list.html('');
+                            questions_data.forEach(function (question) {
+                                question_pages_list.html(
+                                    question_pages_list.html() +
+                                    `<li class="list-group-item">
+                                        <a href="${question.link}">
+                                           <span>
+                                               ${question.text}
+                                           </span>
+                                       </a>
+                                    </li>`
+                                );
+                            });
+                        }
+                    }
+                });
+                e.preventDefault();
+            });
+        });
+    </script>
+{% endblock %}
