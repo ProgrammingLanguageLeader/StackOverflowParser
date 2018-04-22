@@ -16,12 +16,11 @@ def search_answers(request):
         question = ''
 
     question_links = fetch_question_page_links(question)
-    print('questions_links', question_links)
     questions_data = []
     for question_link in question_links:
         questions_data.append({
             'text': question_link.text,
-            'link': 'https://stackoverflow.com/%s' %
+            'link': 'https://stackoverflow.com%s' %
                     question_link.attrs['href']
         })
     data = {

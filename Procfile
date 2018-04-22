@@ -1,1 +1,1 @@
-web: python stackoverflow_parser/manage.py runserver
+web: gunicorn stackoverflow_parser.wsgi --log-file -
